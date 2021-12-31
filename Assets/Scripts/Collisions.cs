@@ -144,8 +144,8 @@ public class Collisions : MonoBehaviour
             GameManager.Instance.gatheredMoney -= totalCupPrice;
             GameManager.Instance.SetMoneyTexts();
 
-            GameManager.Instance.dustParticalEffect.transform.position = new Vector3(cupPosX, cupPosY + 2f, cupPosZ);
-            GameManager.Instance.dustParticalEffect.Play();
+            GameManager.Instance.moneyParticalEffect.transform.position = new Vector3(cupPosX, cupPosY + 2f, cupPosZ);
+            GameManager.Instance.moneyParticalEffect.Play();
             GameManager.Instance.cupList.Remove(this.gameObject);
             Destroy(this.gameObject);
         }

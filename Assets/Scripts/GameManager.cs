@@ -68,7 +68,10 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         z_index = 0f;
+        cupList.Add(rootCoffee);
         cupList.Add(firstCoffee);
+        rootCoffee.transform.position = new Vector3(rootCoffee.transform.position.x,
+                        transform.position.y,transform.position.z - spaceBetweenParts);
         
         playerMaxHorizontalSpeed = playerMaxHorizontalSpeed * smoothTime;
         
@@ -78,7 +81,7 @@ public class GameManager : MonoBehaviour
     }
     void Start() 
     {
-        Application.targetFrameRate = 90;
+        Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame
@@ -95,6 +98,7 @@ public class GameManager : MonoBehaviour
         {
             totalMoney = 0;
         }
+
 
     }
  
@@ -119,24 +123,60 @@ public class GameManager : MonoBehaviour
         go.transform.DOScale(1f, _waveSpeed);
     }
 
+    // public void SetPosition()
+    // {
+    //     int cupCount = cupList.Count;
+    //     float playerPosX = rootCoffee.transform.position.x;
+    //     float playerPosZ = rootCoffee.transform.position.z;
+
+    //     for(int i = 1; i < cupCount; i++)
+    //     {
+    //         if(cupList.Count > 0)
+    //         {
+    //             cupList[i].transform.position = Vector3.Lerp(cupList[i].transform.position,
+    //             new Vector3(Mathf.Lerp(cupList[i].transform.position.x, playerPosX,Mathf.Pow(((float)((cupCount-i)+stackEaseOffset)/(float)(cupCount+stackEaseOffset)),3) * 
+    //             playerMaxHorizontalSpeed * Time.deltaTime)
+    //             ,1.5f,playerPosZ + (i * spaceBetweenParts)),((float)((cupCount-i)+stackEaseOffset)/(float)(cupCount + stackEaseOffset)) + .5f);
+    //         }
+    //     }
+    // }
+
+    // public void SetPosition()
+    // {
+    //     int cupCount = cupList.Count;
+    //     float playerPosX = rootCoffee.transform.position.x;
+    //     float playerPosZ = rootCoffee.transform.position.z;
+
+
+    //     if(cupList.Count > 0)
+    //     {
+    //         for(int i = 1; i < cupCount; i++)
+    //         {
+    //             cupList[i].transform.position = Vector3.Lerp(cupList[i].transform.position,
+    //             new Vector3(Mathf.Lerp(cupList[i].transform.position.x, cupList[i-1].transform.position.x,Mathf.Pow(((float)((cupCount-i)+stackEaseOffset)/(float)(cupCount+stackEaseOffset)),3) * 
+    //             playerMaxHorizontalSpeed * Time.deltaTime)
+    //             ,1.5f,playerPosZ + (i * spaceBetweenParts)),((float)((cupCount-i)+stackEaseOffset)/(float)(cupCount + stackEaseOffset)) + .5f);
+    //         }
+    //     }
+        
+    // }
     public void SetPosition()
     {
         int cupCount = cupList.Count;
         float playerPosX = rootCoffee.transform.position.x;
         float playerPosZ = rootCoffee.transform.position.z;
+        
 
-        for(int i = 0; i < cupCount; i++)
+        if(cupList.Count > 1)
         {
-            if(cupList.Count > 0)
+            for(int i = 1; i < cupCount; i++)
             {
-                cupList[i].transform.position = Vector3.Lerp(cupList[i].transform.position,
-                new Vector3(Mathf.Lerp(cupList[i].transform.position.x, playerPosX,Mathf.Pow(((float)((cupCount-i)+stackEaseOffset)/(float)(cupCount+stackEaseOffset)),3) * 
-                playerMaxHorizontalSpeed * Time.deltaTime)
-                ,1.5f,playerPosZ + (i * spaceBetweenParts)),((float)((cupCount-i)+stackEaseOffset)/(float)(cupCount + stackEaseOffset)) + .5f);
-            }
-            
+                cupList[i].transform.position = new Vector3(Mathf.Lerp(cupList[i].transform.position.x, cupList[i-1].transform.position.x,Time.deltaTime * 20),
+                1.5f,playerPosZ + (i * spaceBetweenParts));
 
+            }
         }
+        
     }
     private void RotateGateCups()
     {
@@ -188,8 +228,12 @@ public class GameManager : MonoBehaviour
         player.transform.DOMoveX(0.5f, 1f);
         yield return new WaitForSeconds(1f);
         player.transform.DOMove(new Vector3(0.25f, 1.75f, 222f), 4f);
+        
+        // Camera.main.GetComponent<CameraFollow>().enabled = false;
         virtualCam2.SetActive(false);
         virtualCam3.SetActive(true);
+
+
         StartCoroutine(DoMoveY());
     }
 
