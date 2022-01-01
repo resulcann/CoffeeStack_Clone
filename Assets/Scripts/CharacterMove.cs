@@ -14,6 +14,7 @@ public class CharacterMove : MonoBehaviour
     private float mouseCurrentPos;
     private float playerCurrentPos;
     public float playerSpeed = 5f;
+    public Rigidbody rb;
 
 
     private void Start()
@@ -21,14 +22,23 @@ public class CharacterMove : MonoBehaviour
         playerCurrentPos = transform.localPosition.x;
         mouseStartPos = Input.mousePosition.x;
         mouseStartPos /= Screen.width;
+        rb = GetComponent<Rigidbody>();
     }
 
-    void Update() {
-
+    // void Update() 
+    // {
+        
+        
+    //     // transform.Translate(Vector3.forward * playerSpeed * Time.deltaTime);
+    // }
+    private void FixedUpdate() 
+    {
         HandLeMovement();
-        transform.Translate(Vector3.forward * playerSpeed * Time.deltaTime);
+        rb.velocity = Vector3.forward * playerSpeed * Time.deltaTime *50;
     }
 
+
+    
     void HandLeMovement()
     {
 

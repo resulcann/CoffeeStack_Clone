@@ -28,7 +28,7 @@ public class Collisions : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision other) 
+    private void OnTriggerEnter(Collider other) 
     {
         if(other.gameObject.tag == "Collectable" && other.gameObject.GetComponent<Collectable>().GetIsCollected() == false)
         {   

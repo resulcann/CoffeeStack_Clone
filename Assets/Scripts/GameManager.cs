@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         SetPosition();
         RotateGateCups();
@@ -101,6 +101,7 @@ public class GameManager : MonoBehaviour
 
 
     }
+
  
     public IEnumerator WaveEffect()
     {
@@ -218,6 +219,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator FinishGame()
     {
+        player.GetComponent<CharacterMove>().rb.velocity = Vector3.zero;
         virtualCam1.SetActive(false);
         virtualCam2.SetActive(true);
         virtualCam3.SetActive(false);
