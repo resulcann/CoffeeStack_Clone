@@ -5,11 +5,7 @@ using DG.Tweening;
 
 public class Collisions : MonoBehaviour
 {
-    GameObject CremaCup;
-    GameObject EmptyCup;
-    GameObject FilledCup;
-    GameObject WithPipette;
-    GameObject LidCup;
+    public GameObject CremaCup,EmptyCup,FilledCup,WithPipette,LidCup;
     CheckBools checkBools;
     Transform collectedCups;
     public int totalCupPrice;
@@ -32,12 +28,12 @@ public class Collisions : MonoBehaviour
     {
         if(other.gameObject.tag == "Collectable" && other.gameObject.GetComponent<Collectable>().GetIsCollected() == false)
         {   
+            gameObject.GetComponent<CheckBools>().SetEmptyCupSelected();
             GameManager.Instance.z_index += GameManager.Instance.spaceBetweenParts;
             other.gameObject.GetComponent<Collectable>().SetCollected(); 
             GameManager.Instance.cupList.Add(other.gameObject);
             GameManager.Instance.StartCoroutine(GameManager.Instance.WaveEffect());
             other.gameObject.transform.SetParent(collectedCups);
-            // totalCupPrice += GameManager.Instance.emptyCupPrice;
             GameManager.Instance.gatheredMoney += GameManager.Instance.emptyCupPrice;
             GameManager.Instance.SetMoneyTexts();
             
@@ -45,12 +41,6 @@ public class Collisions : MonoBehaviour
 
         if(other.gameObject.tag == "FlowingCoffee" && checkBools.isEmptyCupSelected())
         {
-            FilledCup.SetActive(true);
-            EmptyCup.SetActive(false);
-            WithPipette.SetActive(false);
-            CremaCup.SetActive(false);
-            LidCup.SetActive(false);
-
             totalCupPrice += GameManager.Instance.filledCupPrice;
             GameManager.Instance.gatheredMoney += GameManager.Instance.filledCupPrice;
             GameManager.Instance.SetMoneyTexts();
@@ -64,13 +54,7 @@ public class Collisions : MonoBehaviour
         if(other.gameObject.tag == "CremaCupGate" && 
         (checkBools.isFilledCupSelected() || checkBools.isEmptyCupSelected()))
         {
-            CremaCup.SetActive(true);
-            EmptyCup.SetActive(false);
-            FilledCup.SetActive(false);
-            WithPipette.SetActive(false);
-            LidCup.SetActive(false);
             checkBools.SetCremaCupSelected();
-
             totalCupPrice += GameManager.Instance.cremaCupPrice;
             GameManager.Instance.gatheredMoney += GameManager.Instance.cremaCupPrice;
             GameManager.Instance.SetMoneyTexts();
@@ -89,13 +73,6 @@ public class Collisions : MonoBehaviour
         }
         if(other.gameObject.tag == "LidMaker")
         {
-            
-            LidCup.SetActive(true);
-            WithPipette.SetActive(false);
-            CremaCup.SetActive(false);
-            EmptyCup.SetActive(false);
-            FilledCup.SetActive(false);
-
             totalCupPrice += GameManager.Instance.lidCupPrice;
             GameManager.Instance.gatheredMoney += GameManager.Instance.lidCupPrice;
             GameManager.Instance.SetMoneyTexts();

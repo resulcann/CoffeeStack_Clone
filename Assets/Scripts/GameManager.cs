@@ -45,7 +45,6 @@ public class GameManager : MonoBehaviour
     public float _waveSpeed = 0.1f;
     public float _waveTimeBetweenToCup = 0.125f;
     public float cupScaleIncrease = 1.1f;
-    [SerializeField] private int stackEaseOffset = 5;
     public float spaceBetweenParts = 1.15f;
     [Range(.25f,1f)] [SerializeField] private float smoothTime = .5f;
     [SerializeField] private float playerMaxHorizontalSpeed = 150f;
@@ -88,7 +87,6 @@ public class GameManager : MonoBehaviour
     void FixedUpdate()
     {
         SetPosition();
-        RotateGateCups();
         if(cupList.Count <= 0)
         {
             SetMoneyTexts();
@@ -124,43 +122,7 @@ public class GameManager : MonoBehaviour
         go.transform.DOScale(1f, _waveSpeed);
     }
 
-    // public void SetPosition()
-    // {
-    //     int cupCount = cupList.Count;
-    //     float playerPosX = rootCoffee.transform.position.x;
-    //     float playerPosZ = rootCoffee.transform.position.z;
 
-    //     for(int i = 1; i < cupCount; i++)
-    //     {
-    //         if(cupList.Count > 0)
-    //         {
-    //             cupList[i].transform.position = Vector3.Lerp(cupList[i].transform.position,
-    //             new Vector3(Mathf.Lerp(cupList[i].transform.position.x, playerPosX,Mathf.Pow(((float)((cupCount-i)+stackEaseOffset)/(float)(cupCount+stackEaseOffset)),3) * 
-    //             playerMaxHorizontalSpeed * Time.deltaTime)
-    //             ,1.5f,playerPosZ + (i * spaceBetweenParts)),((float)((cupCount-i)+stackEaseOffset)/(float)(cupCount + stackEaseOffset)) + .5f);
-    //         }
-    //     }
-    // }
-
-    // public void SetPosition()
-    // {
-    //     int cupCount = cupList.Count;
-    //     float playerPosX = rootCoffee.transform.position.x;
-    //     float playerPosZ = rootCoffee.transform.position.z;
-
-
-    //     if(cupList.Count > 0)
-    //     {
-    //         for(int i = 1; i < cupCount; i++)
-    //         {
-    //             cupList[i].transform.position = Vector3.Lerp(cupList[i].transform.position,
-    //             new Vector3(Mathf.Lerp(cupList[i].transform.position.x, cupList[i-1].transform.position.x,Mathf.Pow(((float)((cupCount-i)+stackEaseOffset)/(float)(cupCount+stackEaseOffset)),3) * 
-    //             playerMaxHorizontalSpeed * Time.deltaTime)
-    //             ,1.5f,playerPosZ + (i * spaceBetweenParts)),((float)((cupCount-i)+stackEaseOffset)/(float)(cupCount + stackEaseOffset)) + .5f);
-    //         }
-    //     }
-        
-    // }
     public void SetPosition()
     {
         int cupCount = cupList.Count;
@@ -178,12 +140,6 @@ public class GameManager : MonoBehaviour
             }
         }
         
-    }
-    private void RotateGateCups()
-    {
-        inCanvasCup1.transform.Rotate(0,-rotateSpeed * Time.deltaTime, 0);
-        inCanvasCup2.transform.Rotate(0,-rotateSpeed * Time.deltaTime, 0);
-        inCanvasCup3.transform.Rotate(0,-rotateSpeed * Time.deltaTime, 0);
     }
 
     public IEnumerator SellCups(GameObject go , BoxCollider col, int totalCupPrice)

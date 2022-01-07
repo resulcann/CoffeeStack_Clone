@@ -2,22 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class CheckBools : MonoBehaviour
 {
+    Collisions collisions;
     bool _cremaCup;
     bool _emptyCup;
     bool _filledCup;
     bool _withPipette;
     bool _lidCup;
+    
+
+    
 
     void Start()
     {
+        collisions = GetComponent<Collisions>();
+
         _emptyCup = true;
         _cremaCup = false;
         _filledCup = false;
         _withPipette = false;
         _lidCup = false;
     }
+
     public void SetCremaCupSelected()
     {
         _cremaCup = true;
@@ -25,6 +33,13 @@ public class CheckBools : MonoBehaviour
         _filledCup = false;
         _withPipette = false;
         _lidCup = false;
+        
+        collisions.EmptyCup.SetActive(false);
+        collisions.CremaCup.SetActive(true);
+        collisions.FilledCup.SetActive(false);
+        collisions.WithPipette.SetActive(false);
+        collisions.LidCup.SetActive(false);
+
     }
     public void SetEmptyCupSelected()
     {
@@ -33,6 +48,12 @@ public class CheckBools : MonoBehaviour
         _filledCup = false;
         _withPipette = false;
         _lidCup = false;
+        
+        collisions.EmptyCup.SetActive(true);
+        collisions.CremaCup.SetActive(false);
+        collisions.FilledCup.SetActive(false);
+        collisions.WithPipette.SetActive(false);
+        collisions.LidCup.SetActive(false);
 
     }
     public void SetFilledCupSelected()
@@ -43,6 +64,12 @@ public class CheckBools : MonoBehaviour
         _withPipette = false;
         _lidCup = false;
 
+        collisions.EmptyCup.SetActive(false);
+        collisions.CremaCup.SetActive(false);
+        collisions.FilledCup.SetActive(true);
+        collisions.WithPipette.SetActive(false);
+        collisions.LidCup.SetActive(false);
+
     }
     public void SetWithPipetteSelected()
     {
@@ -52,6 +79,12 @@ public class CheckBools : MonoBehaviour
         _withPipette = true;
         _lidCup = false;
 
+        collisions.EmptyCup.SetActive(false);
+        collisions.CremaCup.SetActive(false);
+        collisions.FilledCup.SetActive(false);
+        collisions.WithPipette.SetActive(true);
+        collisions.LidCup.SetActive(false);
+
     }
     public void SetLidCupSelected()
     {
@@ -60,6 +93,13 @@ public class CheckBools : MonoBehaviour
         _filledCup = false;
         _withPipette = false;
         _lidCup = true;
+
+        collisions.EmptyCup.SetActive(false);
+        collisions.CremaCup.SetActive(false);
+        collisions.FilledCup.SetActive(false);
+        collisions.WithPipette.SetActive(false);
+        collisions.LidCup.SetActive(true);
+
     }
 
     public bool isEmptyCupSelected()

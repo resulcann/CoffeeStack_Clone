@@ -93,6 +93,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ac9855b2624f80438f20e99e3783120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CremaCup: {fileID: 6345984030728582457, guid: de8bcef0963d6dc4286806d208529780, type: 3}
+  EmptyCup: {fileID: 3739764472678821899, guid: f29f369720e80d64f8fd2695c44b79a0, type: 3}
+  FilledCup: {fileID: 7301385813290936293, guid: ec0a917abf73db343aa86d9d80babad2, type: 3}
+  WithPipette: {fileID: 1684186452939291571, guid: 77c761db0e6a08e4da0d4fe16b440259, type: 3}
+  LidCup: {fileID: 4595424661952224672, guid: 22b63688bcb720043b07bbd04f04a821, type: 3}
   totalCupPrice: 1
 --- !u!114 &5751743104050873554
 MonoBehaviour:
