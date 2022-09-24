@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
     
     void Awake()
     {
+        Application.targetFrameRate = 60;
         z_index = 0f;
         cupList.Add(rootCoffee);
         cupList.Add(firstCoffee);

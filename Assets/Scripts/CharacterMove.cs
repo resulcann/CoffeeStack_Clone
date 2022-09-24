@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,21 +17,19 @@ public class CharacterMove : MonoBehaviour
     public float playerSpeed = 5f;
     public Rigidbody rb;
 
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     private void Start()
     {
         playerCurrentPos = transform.localPosition.x;
         mouseStartPos = Input.mousePosition.x;
         mouseStartPos /= Screen.width;
-        rb = GetComponent<Rigidbody>();
+        
     }
-
-    // void Update() 
-    // {
-        
-        
-    //     // transform.Translate(Vector3.forward * playerSpeed * Time.deltaTime);
-    // }
+    
     private void FixedUpdate() 
     {
         HandLeMovement();
